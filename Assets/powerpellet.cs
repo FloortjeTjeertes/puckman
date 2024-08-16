@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class powerpellet : MonoBehaviour
+public class Powerpellet : MonoBehaviour
 {
     public bool isPowerPellet = false;
 
-    private Sprite defaultSprite; // Assign in the editor
-    private Sprite powerPelletSprite; // Assign in the editor
+    [SerializeField] public Sprite defaultSprite; // Assign in the editor
+    [SerializeField] public Sprite powerPelletSprite; // Assign in the editor
+
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +44,7 @@ public class powerpellet : MonoBehaviour
         }
     }
 
-    private ChangeSprite()
+    private void ChangeSprite()
     {
         if (isPowerPellet && powerPelletSprite != null)
         {
