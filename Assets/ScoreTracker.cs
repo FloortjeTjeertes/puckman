@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-static class ScoreTracker:MonoBehaviour
+public class ScoreTracker:MonoBehaviour
 {
 
-    public Instance ScoreTracker;
+    public ScoreTracker Instance;
+
+    public static int score = 0;
+    public static int highScore = 0;
 
     public void Awake()
     {
-        if (ScoreTracker == null)
+        if (Instance == null)
         {
-            ScoreTracker = this;
+            Instance = this;
             DontDestroyOnLoad(this);
         }
         else
@@ -22,8 +25,7 @@ static class ScoreTracker:MonoBehaviour
     
 
 
-    public static int score = 0;
-    public static int highScore = 0;
+  
 
     public static void ResetScore()
     {

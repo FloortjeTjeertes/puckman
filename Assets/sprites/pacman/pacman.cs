@@ -29,32 +29,32 @@ public class pacman : MonoBehaviour
     {
         if (direction == Vector2.up)
         {
-            Debug.Log("Pacman is moving up");
+            // Debug.Log("Pacman is moving up");
             currentDirection = Vector2.up;
         }
         else if (direction == Vector2.down)
         {
-            Debug.Log("Pacman is moving down");
+            // Debug.Log("Pacman is moving down");
             currentDirection = Vector2.down;
 
         }
         else if (direction == Vector2.left)
         {
-            Debug.Log("Pacman is moving left");
+            // Debug.Log("Pacman is moving left");
             currentDirection = Vector2.left;
         }
         else if (direction == Vector2.right)
         {
-            Debug.Log("Pacman is moving right");
+            // Debug.Log("Pacman is moving right");
             currentDirection = Vector2.right;
         }
-        else
-        {
-            Debug.Log("Pacman is not moving");
-            currentDirection = Vector2.zero;
+        // else if (direction == Vector2.zero)
+        // {
+        //     Debug.Log("Pacman is not moving");
+        //     currentDirection = Vector2.zero;
 
             
-        }
+        // }
 
     }
 
@@ -81,12 +81,12 @@ public class pacman : MonoBehaviour
     {
         foreach (GameObject pickup in pickupTypes)
         {
-            if(GameObject.GetComponent<Fruit>){
-                Debug.Log("Pacman ate a fruit" + pickup.name);
-            }
-            if(GameObject.GetComponent<Pellet>){
-                Debug.Log("Pacman ate a pellet" + pickup.name);
-            }
+            // if(GameObject.GetComponent<Fruit>){
+            //     Debug.Log("Pacman ate a fruit" + pickup.name);
+            // }
+            // if( pickup==GameObject.GetComponent<powerpellet>){
+            //     Debug.Log("Pacman ate a pellet" + pickup.name);
+            // }
         }
     }
 
@@ -96,5 +96,20 @@ public class pacman : MonoBehaviour
     {
         Debug.Log("Pacman hit a wall");
         SetDirection(Vector2.zero);
+    }
+
+    private void checkPelletType(GameObject pickup)
+    {
+    
+        switch(pickup.name){
+            case "PowerPellet":
+                // Debug.Log("Pacman ate a Powerpellet");
+            break;
+            case "Pellet":
+                // Debug.Log("Pacman ate a Pellet");
+            break;
+        }
+
+
     }
 }
