@@ -14,8 +14,7 @@ public class pacman : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(currentDirection * speed * Time.deltaTime);
-
+        Move();
     }
 
     public void OnMove(InputValue value)
@@ -27,6 +26,9 @@ public class pacman : MonoBehaviour
 
     public void SetDirection(Vector2 direction)
     {
+
+        checkForWall(direction);
+
         if (direction == Vector2.up)
         {
             // Debug.Log("Pacman is moving up");
@@ -48,22 +50,19 @@ public class pacman : MonoBehaviour
             // Debug.Log("Pacman is moving right");
             currentDirection = Vector2.right;
         }
-        // else if (direction == Vector2.zero)
-        // {
-        //     Debug.Log("Pacman is not moving");
-        //     currentDirection = Vector2.zero;
-
-            
-        // }
+        
 
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("wall"))
+       
+        if(other.gameObject.CompareTag("wall"))
         {
-            checkForWall();
+            Debug.Log("Pacman hit a wall");
+            StopMoving();
         }
+
         if (other.gameObject.CompareTag("pickup"))
         {
             Debug.Log("Pacman ate a pickup");
@@ -77,15 +76,18 @@ public class pacman : MonoBehaviour
         }
     }
 
-
    
 
 
-    //TODO: Check for wall maybe make generic so ghosts can use it
-    private void checkForWall()
+    private bool checkForWall(Vector2 direction)
     {
-        Debug.Log("Pacman hit a wall");
-        SetDirection(Vector2.zero);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
+        Debug.Log("Pacman hit a: " + hit.collider.gameObject.name);
+        if(hit.collider.gameObject.CompareTag("wall"))
+        {
+            return true;
+        }
+        return false;
     }
 
     private void checkPelletType(GameObject pickup)
@@ -122,7 +124,20 @@ public class pacman : MonoBehaviour
 
     private void Respawn()
     {
-        transform.position = spawnPoint.transform.position;
+        StopMoving();
+        currentDirection = Vector2.zero;
+    }
+    private void Move()
+    {
+        if(!        checkForWall(currentDirection)){
+
+        transform.Translate(currentDirection * speed * Time.deltaTime);
+        }
+    }
+
+    private void StopMoving()
+    {
+        currentDirection = Vector2.zero;
     }
 
 }

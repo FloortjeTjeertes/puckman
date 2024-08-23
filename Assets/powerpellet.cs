@@ -50,7 +50,7 @@ public class Powerpellet : MonoBehaviour
         {
             spriteRenderer.sprite = powerPelletSprite;
         }
-        else if (defaultSprite != null)
+        else 
         {
             spriteRenderer.sprite = defaultSprite;
         }
