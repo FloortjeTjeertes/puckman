@@ -4,17 +4,9 @@ using UnityEngine;
 
 public class Blinky :  Ghost
 {
-    public float test;
+    public bool VulnerableState;
+    
 
-    public override void SetTarget()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    // public override void Move()
-    // {
-    //     throw new System.NotImplementedException();
-    // }
 
     // Start is called before the first frame update
     void Start()
@@ -27,4 +19,11 @@ public class Blinky :  Ghost
     {
         
     }
+
+    public override void SetTarget()
+    {
+        throw new System.NotImplementedException();
+    }
+    
+   
 }

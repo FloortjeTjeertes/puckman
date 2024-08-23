@@ -8,8 +8,8 @@ public class pacman : MonoBehaviour
     private Vector2 currentDirection = Vector2.zero; // Store the current movement direction
     public float speed = 5.0f;
     public GameObject wall;
-    public List<GameObject> pickupTypes = new List<GameObject>();
-    public List<GameObject> enemies = new List<GameObject>();
+
+    public GameObject spawnPoint;
 
     // Update is called once per frame
     void Update()
@@ -22,7 +22,7 @@ public class pacman : MonoBehaviour
     {
         Vector2 direction = value.Get<Vector2>();
         SetDirection(direction);
-        Debug.Log("Pacman is moving");
+        // Debug.Log("Pacman is moving");
     }
 
     public void SetDirection(Vector2 direction)
@@ -67,28 +67,18 @@ public class pacman : MonoBehaviour
         if (other.gameObject.CompareTag("pickup"))
         {
             Debug.Log("Pacman ate a pickup");
+            checkPelletType(other.gameObject);
             // Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("enemy"))
         {
-            Debug.Log("Pacman hit an enemy");
+            checkForGhost(other.gameObject);
             // Destroy(gameObject);
         }
     }
 
 
-    private void checkForPickupType()
-    {
-        foreach (GameObject pickup in pickupTypes)
-        {
-            // if(GameObject.GetComponent<Fruit>){
-            //     Debug.Log("Pacman ate a fruit" + pickup.name);
-            // }
-            // if( pickup==GameObject.GetComponent<powerpellet>){
-            //     Debug.Log("Pacman ate a pellet" + pickup.name);
-            // }
-        }
-    }
+   
 
 
     //TODO: Check for wall maybe make generic so ghosts can use it
@@ -103,13 +93,36 @@ public class pacman : MonoBehaviour
     
         switch(pickup.name){
             case "PowerPellet":
-                // Debug.Log("Pacman ate a Powerpellet");
+                Debug.Log("Pacman ate a Powerpellet");
             break;
             case "Pellet":
-                // Debug.Log("Pacman ate a Pellet");
+                Debug.Log("Pacman ate a Pellet");
             break;
         }
 
 
     }
+
+    private void checkForGhost(GameObject enemy)
+    {
+        Debug.Log("Pacman hit an enemy ghost");
+        Ghost ghost = enemy.GetComponent<Ghost>(); 
+
+        if(ghost.isVulnerable)
+        {
+            Debug.Log("Pacman ate a ghost");
+        }
+        else
+        {
+            Debug.Log("Pacman was eaten by a ghost");
+            LiveTracker.LoseLife();
+            Respawn();
+        }
+    }
+
+    private void Respawn()
+    {
+        transform.position = spawnPoint.transform.position;
+    }
+
 }

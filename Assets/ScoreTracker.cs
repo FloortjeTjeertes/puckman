@@ -7,8 +7,12 @@ public class ScoreTracker:MonoBehaviour
 
     public ScoreTracker Instance;
 
-    public static int score = 0;
+    [SerializeField]
+    private static int score = 0;
+
+    [SerializeField]
     public static int highScore = 0;
+
 
     public void Awake()
     {
@@ -22,9 +26,19 @@ public class ScoreTracker:MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+  
     
 
+    public static int GetScore()
+    {
+        return score;
+    }
 
+    public static int GetHighScore()
+    {
+        return highScore;
+    }
   
 
     public static void ResetScore()
