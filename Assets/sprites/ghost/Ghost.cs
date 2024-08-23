@@ -8,6 +8,8 @@ public abstract class Ghost : MonoBehaviour
     public Grid grid;
     private GhostMode mode;
     private float baseSpeed;
+
+    public bool isVulnerable;
     // private Tile selectedTile;
 
 
@@ -25,13 +27,15 @@ public abstract class Ghost : MonoBehaviour
     {
         baseSpeed = newSpeed;
     }
+
+    // public  void Move(){
+
+    // };
      public abstract void SetTarget();
 
 
     
-    // public  void Move(){
 
-    // };
 
 
 }
